@@ -1,0 +1,10 @@
+# jobrunner 配置文件
+
+# 基础路径 - 目录将在此路径下创建
+base_path: "/root/code/jobs"
+
+# 检查间隔 - 每隔多久检查当前目录是否为空
+check_interval: 30s
+
+# 初始延迟 - 启动后延迟多久创建首个目录
+initial_delay: 5s
