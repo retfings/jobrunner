@@ -12,10 +12,8 @@ import (
 
 // Service systemd 服务管理
 type Service struct {
-	svc     service.Service
-	name    string
-	display string
-	desc    string
+	svc  service.Service
+	name string
 }
 
 // Config 服务配置

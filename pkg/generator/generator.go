@@ -90,7 +90,10 @@ func (g *Generator) getNextSequence(todayPath string) (int, error) {
 		}
 		name := entry.Name()
 		if seqPattern.MatchString(name) {
-			seq, _ := strconv.Atoi(name)
+			seq, err := strconv.Atoi(name)
+			if err != nil {
+				continue
+			}
 			if seq > maxSeq {
 				maxSeq = seq
 			}
@@ -118,7 +121,10 @@ func (g *Generator) GetCurrentPath() (string, error) {
 		}
 		name := entry.Name()
 		if seqPattern.MatchString(name) {
-			seq, _ := strconv.Atoi(name)
+			seq, err := strconv.Atoi(name)
+			if err != nil {
+				continue
+			}
 			if seq > maxSeq {
 				maxSeq = seq
 			}

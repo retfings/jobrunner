@@ -3,8 +3,18 @@ package generator
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
+
+// hasPrefix 检查路径是否有指定的前缀（路径安全的方式）
+func hasPrefix(path, prefix string) bool {
+	rel, err := filepath.Rel(prefix, path)
+	if err != nil {
+		return false
+	}
+	return !strings.HasPrefix(rel, "..")
+}
 
 func TestGetTodayPath(t *testing.T) {
 	gen := NewGenerator("/root/code/jobs")
@@ -17,7 +27,7 @@ func TestGetTodayPath(t *testing.T) {
 	}
 
 	// 验证路径包含基础路径
-	if !filepath.HasPrefix(path, gen.basePath) {
+	if !hasPrefix(path, gen.basePath) {
 		t.Errorf("GetTodayPath() 路径不以 basePath 开头：%s", path)
 	}
 }

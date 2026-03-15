@@ -86,9 +86,7 @@ func run(configPath string) {
 	sig := <-sigChan
 	log.Printf("收到信号：%v，正在关闭...", sig)
 
-	if err := mon.Stop(); err != nil {
-		log.Printf("停止监控失败：%v", err)
-	}
+	mon.Stop()
 
 	log.Println("jobrunner 已关闭")
 }
