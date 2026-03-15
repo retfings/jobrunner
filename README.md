@@ -12,7 +12,7 @@
 - 当目录不为空时自动创建下一个序号目录
 - 按时间规则自动生成目录（如 `/var/jobs/2026/03/14/001`）
 - 使用 YAML 配置文件
-- 每天 0 点重置序号
+- 每天 0 点自动创建新的日期目录，序号从 001 重新开始
 
 ## 目录结构
 
@@ -114,6 +114,20 @@ sudo journalctl -u jobrunner -f
 sudo make uninstall
 ```
 
+## 更新服务
+
+当代码修改后，重新构建并更新服务：
+
+```bash
+# 方法 1：使用 Makefile（推荐）
+sudo make update
+
+# 方法 2：手动更新
+make build                                    # 重新构建
+sudo cp bin/jobrunner /usr/local/bin/         # 覆盖二进制文件
+sudo systemctl restart jobrunner              # 重启服务
+```
+
 ## 命令行参数
 
 ```
@@ -130,7 +144,7 @@ sudo make uninstall
 1. 服务启动 → 自动创建当天首个目录（如 `/var/jobs/2026/03/14/001`）
 2. 每隔 N 秒检查当前目录是否为空
 3. 如果目录不为空 → 立即创建下一个序号目录
-4. 每天 0 点重置序号，从 001 重新开始
+4. 第二天 0 点后 → 自动检测日期变化，创建新的日期目录，序号从 001 重新开始
 
 ## 验证方式
 

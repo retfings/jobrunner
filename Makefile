@@ -35,6 +35,14 @@ install: build
 	@echo "使用 'sudo systemctl start $(BINARY_NAME)' 启动服务"
 	@echo "使用 'sudo systemctl status $(BINARY_NAME)' 查看状态"
 
+# 更新服务
+update: build
+	@echo "更新服务..."
+	@sudo cp $(BINARY_PATH) /usr/local/bin/$(BINARY_NAME)
+	@sudo systemctl restart $(BINARY_NAME)
+	@echo "服务更新完成"
+	@echo "使用 'sudo systemctl status $(BINARY_NAME)' 查看状态"
+
 # 卸载服务
 uninstall:
 	@echo "卸载服务..."
@@ -72,6 +80,7 @@ help:
 	@echo "  make build      - 构建程序"
 	@echo "  make clean      - 清理构建文件"
 	@echo "  make install    - 安装为 systemd 服务"
+	@echo "  make update     - 更新服务（重新构建并重启）"
 	@echo "  make uninstall  - 卸载服务"
 	@echo "  make run        - 前台运行程序"
 	@echo "  make test       - 运行测试"
