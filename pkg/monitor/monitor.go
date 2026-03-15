@@ -56,10 +56,9 @@ func (m *Monitor) Start() error {
 }
 
 // Stop 停止监控
-func (m *Monitor) Stop() error {
+func (m *Monitor) Stop() {
 	log.Println("停止目录监控器...")
 	m.cancel()
-	return nil
 }
 
 // run 监控循环
@@ -86,7 +85,16 @@ func (m *Monitor) check() {
 	}
 
 	if currentPath == "" {
-		log.Println("今天还没有创建目录")
+		log.Println("今天还没有创建目录，创建新的日期目录")
+		newPath, err := m.gen.CreateNext()
+		if err != nil {
+			log.Printf("创建新目录失败：%v", err)
+			return
+		}
+		log.Printf("创建新的日期目录：%s", newPath)
+		if m.onCreate != nil {
+			m.onCreate(newPath)
+		}
 		return
 	}
 
