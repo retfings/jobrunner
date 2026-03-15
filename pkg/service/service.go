@@ -31,12 +31,12 @@ type Config struct {
 // New 创建服务
 func New(cfg Config) (*Service, error) {
 	svcConfig := &service.Config{
-		Name:        cfg.Name,
-		DisplayName: cfg.DisplayName,
-		Description: cfg.Description,
-		Executable:  cfg.Executable,
+		Name:             cfg.Name,
+		DisplayName:      cfg.DisplayName,
+		Description:      cfg.Description,
+		Executable:       cfg.Executable,
 		WorkingDirectory: cfg.WorkingDir,
-		Arguments: []string{"--config", cfg.ConfigPath},
+		Arguments:        []string{"--config", cfg.ConfigPath},
 	}
 
 	prg := &program{}

@@ -11,11 +11,11 @@ import (
 
 // Monitor 目录监控器
 type Monitor struct {
-	gen       *generator.Generator
-	interval  time.Duration
-	onCreate  func(path string)
-	ctx       context.Context
-	cancel    context.CancelFunc
+	gen      *generator.Generator
+	interval time.Duration
+	onCreate func(path string)
+	ctx      context.Context
+	cancel   context.CancelFunc
 }
 
 // NewMonitor 创建新的监控器

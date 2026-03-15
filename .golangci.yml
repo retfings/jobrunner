@@ -1,5 +1,3 @@
-language: Go
-
 issues:
   exclude-rules:
     - path: _test\.go
@@ -13,8 +11,6 @@ linters-settings:
     check-blank: true
   gofmt:
     simplify: true
-  govet:
-    check-shadowing: true
   gosec:
     severity: medium
     confidence: medium
@@ -27,8 +23,6 @@ linters-settings:
     min-occurrences: 3
   misspell:
     locale: US
-  unused:
-    check-exported: false
   unparam:
     check-exported: true
 
