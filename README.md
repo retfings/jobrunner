@@ -35,7 +35,8 @@ jobrunner/
 ├── go.mod
 ├── go.sum
 ├── Makefile                 # 构建脚本
-└── install-service.sh       # 服务安装脚本
+├── install-service.sh       # 服务安装脚本
+└── update-service.sh        # 服务更新脚本
 ```
 
 ## 配置说明
@@ -119,10 +120,13 @@ sudo make uninstall
 当代码修改后，重新构建并更新服务：
 
 ```bash
-# 方法 1：使用 Makefile（推荐）
+# 方法 1：使用更新脚本（推荐）
+sudo ./update-service.sh
+
+# 方法 2：使用 Makefile
 sudo make update
 
-# 方法 2：手动更新
+# 方法 3：手动更新
 make build                                    # 重新构建
 sudo cp bin/jobrunner /usr/local/bin/         # 覆盖二进制文件
 sudo systemctl restart jobrunner              # 重启服务
